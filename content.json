@@ -1,0 +1,43 @@
+{
+  "wedding_date_utc": "2026-04-25T07:00:00Z",
+  "reveal_date_utc": "2037-04-26T02:00:00Z",
+  "couple": {
+    "name1": "Matt",
+    "name2": "Steph"
+  },
+  "coordinates": {
+    "display": "49°06′12″N 125°52′58″W",
+    "display_short": "49.1033°N, 125.8828°W",
+    "lat": 49.1033,
+    "lng": -125.8828,
+    "place_name": "Cox Bay, Tofino"
+  },
+  "coordinates_reveal_text": "Let's all meet in Tofino.",
+  "opening_line": "Eleven years ago you sat us all together at Table 11.",
+  "greeting": "Here are eleven years of congratulations from Table 11.",
+  "sign_off": "We'll see you in Tofino.",
+  "couples": [
+    {
+      "names": "Josh and Emilie",
+      "message": "[TBD — to be added before lock-in]",
+      "message_date": null
+    },
+    {
+      "names": "Luke and Dani",
+      "message": "[TBD — to be added before lock-in]",
+      "message_date": null
+    },
+    {
+      "names": "Ben and Brandy",
+      "message": "[TBD — to be added before lock-in]",
+      "message_date": null
+    },
+    {
+      "names": "JJ and Larissa",
+      "message": "[TBD — to be added before lock-in]",
+      "message_date": null
+    }
+  ],
+  "media_heading": "Table 11 over the years.",
+  "media": []
+}

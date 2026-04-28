@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#100D08">
+  <title>Table 11</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ======================================================
+       STATE 1: PRE-REVEAL
+       Visible until April 26, 2037 02:00:00 UTC
+       ====================================================== -->
+  <div id="pre-reveal" class="state">
+    <figure class="hero" aria-hidden="true">
+      <img src="media/hero.jpg" alt="" class="hero-img">
+      <div class="vignette"></div>
+    </figure>
+    <div class="timer-overlay">
+      <div class="countdown" id="countdown" role="timer" aria-label="Countdown to April 25, 2037">
+        <div class="unit">
+          <span class="num" id="cd-years">--</span>
+          <span class="lbl">Years</span>
+        </div>
+        <span class="dot" aria-hidden="true">·</span>
+        <div class="unit">
+          <span class="num" id="cd-months">--</span>
+          <span class="lbl">Months</span>
+        </div>
+        <span class="dot" aria-hidden="true">·</span>
+        <div class="unit">
+          <span class="num" id="cd-days">--</span>
+          <span class="lbl">Days</span>
+        </div>
+        <span class="dot" aria-hidden="true">·</span>
+        <div class="unit">
+          <span class="num" id="cd-hours">--</span>
+          <span class="lbl">Hours</span>
+        </div>
+        <span class="dot" aria-hidden="true">·</span>
+        <div class="unit">
+          <span class="num" id="cd-minutes">--</span>
+          <span class="lbl">Minutes</span>
+        </div>
+        <span class="dot" aria-hidden="true">·</span>
+        <div class="unit">
+          <span class="num" id="cd-seconds">--</span>
+          <span class="lbl">Seconds</span>
+        </div>
+      </div>
+      <p class="date-label">Until April 25, 2037</p>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       STATE 2: POST-REVEAL
+       Hidden until April 26, 2037 02:00:00 UTC
+       ====================================================== -->
+  <div id="post-reveal" class="state" hidden>
+
+    <figure class="hero" aria-label="Cox Bay, Tofino">
+      <img src="media/hero.jpg" alt="Cox Bay, Tofino" class="hero-img">
+      <div class="vignette"></div>
+      <div class="timer-overlay">
+        <div class="countup" id="countup" role="timer" aria-label="Time elapsed since April 25, 2026">
+          <!-- populated by countdown.js — same structure as .countdown -->
+        </div>
+        <p class="date-label">Since April 25, 2026</p>
+      </div>
+    </figure>
+
+    <main class="capsule" id="capsule">
+      <!-- Populated by reveal.js from content.json -->
+      <noscript>
+        <p class="noscript-msg">Please enable JavaScript to view Table 11's time capsule.</p>
+      </noscript>
+    </main>
+
+    <footer class="site-footer">
+      <p>Table 11 &middot; 04.25.2037</p>
+    </footer>
+
+  </div>
+
+  <script src="reveal.js"></script>
+  <script src="countdown.js"></script>
+</body>
+</html>

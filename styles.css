@@ -1,0 +1,589 @@
+/* ============================================================
+   TABLE 11 — Stylesheet
+   Fonts: Cormorant Garamond (serif) + Inter (sans)
+   ============================================================ */
+
+/* ---- FONTS ---- */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('fonts/CormorantGaramond-Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/CormorantGaramond-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/CormorantGaramond-Italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/Inter-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/Inter-Medium.woff2') format('woff2');
+}
+
+/* ---- DESIGN TOKENS ---- */
+:root {
+  /* Page colors */
+  --bg:           #FAF7F2;
+  --text:         #2A2622;
+  --text-muted:   #8A8278;
+  --accent:       #8FA8A3;
+  --rule:         rgba(143, 168, 163, 0.35);
+
+  /* Hero overlay colors */
+  --hero-text:        #FAF7F2;
+  --hero-text-dim:    rgba(250, 247, 242, 0.48);
+  --hero-text-ghost:  rgba(250, 247, 242, 0.30);
+  --hero-shadow:      rgba(10, 7, 4, 0.55);
+
+  /* Typography */
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans:  'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ---- RESET ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Fade in on load — class added by countdown.js */
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+figure {
+  margin: 0;
+}
+
+/* ---- STATES ---- */
+
+/* Both states are position: static by default */
+/* JS toggles [hidden] to show the correct state */
+.state[hidden] {
+  display: none;
+}
+
+/* ---- HERO (shared by both states) ---- */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100dvh;  /* dynamic viewport height — handles mobile browser chrome */
+  overflow: hidden;
+}
+
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;  /* keep the horizon/sky visible */
+  filter: blur(14px);
+  transform: scale(1.08); /* scale up to hide blur edge fringing */
+}
+
+/* White wash overlay — softens and lightens the blurred photo */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: rgba(250, 247, 242, 0.72);
+  pointer-events: none;
+}
+
+/* ---- TIMER OVERLAY (countdown + countup) ---- */
+.timer-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 48px 24px;
+}
+
+/* ---- COUNTDOWN / COUNT-UP ---- */
+.countdown,
+.countup {
+  display: flex;
+  align-items: flex-end;  /* align baselines of dots with numbers */
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+.unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 0 clamp(8px, 1.8vw, 22px);
+}
+
+/* The large number */
+.num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(44px, 7.5vw, 92px);
+  line-height: 1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  text-shadow: none;
+  min-width: 2ch;
+  text-align: center;
+}
+
+/* The unit label (YEARS, MONTHS, etc.) */
+.lbl {
+  font-family: var(--sans);
+  font-size: clamp(8px, 0.85vw, 10px);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-shadow: none;
+}
+
+/* Separator dots between units */
+/* Lifted via padding-bottom to sit visually beside the numbers, not the labels */
+.dot {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4.5vw, 56px);
+  line-height: 1;
+  color: var(--accent);
+  flex-shrink: 0;
+  padding-bottom: calc(clamp(8px, 0.85vw, 10px) + 10px);
+  /* lbl font-size + gap between num and lbl */
+}
+
+/* ---- DATE LABEL (Until … / Since …) ---- */
+.date-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-shadow: none;
+}
+
+/* ============================================================
+   POST-REVEAL — CAPSULE CONTENT
+   (Phase 3 will flesh this out in full)
+   ============================================================ */
+
+.capsule {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 120px 32px 80px;
+}
+
+/* Horizontal hairline rule */
+.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 72px 0;
+}
+
+/* Opening line */
+.opening {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--text);
+  margin-bottom: 80px;
+}
+
+/* Section headings */
+.section-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 40px;
+}
+
+/* Greeting text */
+.greeting {
+  font-family: var(--serif);
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+/* ---- COUPLES ---- */
+.couples-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.couple-item {
+  border-top: 1px solid var(--rule);
+}
+
+.couple-item:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.couple-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 24px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--serif);
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 400;
+  color: var(--text);
+  text-align: left;
+  gap: 16px;
+}
+
+.couple-toggle:hover {
+  color: var(--text-muted);
+}
+
+.couple-toggle-icon {
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  font-family: var(--sans);
+  line-height: 1;
+}
+
+.couple-item.open .couple-toggle-icon {
+  transform: rotate(45deg);
+}
+
+.couple-message {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.couple-item.open .couple-message {
+  max-height: 600px; /* large enough for any message */
+}
+
+.couple-message p {
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.75;
+  color: var(--text);
+  padding-bottom: 8px;
+}
+
+.couple-message time {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 32px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ---- COORDINATES ---- */
+.coordinates-block {
+  padding: 8px 0;
+}
+
+.coordinates-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: clamp(13px, 1.3vw, 15px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  padding: 22px 0;
+  text-align: left;
+  gap: 12px;
+  transition: color 0.2s ease;
+}
+
+.coordinates-btn:hover,
+.coordinates-btn.active {
+  color: var(--text);
+}
+
+.coords-chevron {
+  font-size: 16px;
+  transition: transform 0.35s ease;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.coordinates-btn.active .coords-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown panel */
+.coords-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.coords-panel.open {
+  max-height: 600px;
+}
+
+.coords-reveal-text {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-style: italic;
+  color: var(--text);
+  text-align: center;
+  padding: 32px 0 24px;
+}
+
+.coords-map {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+}
+
+.coords-map iframe {
+  display: block;
+}
+
+.coords-gmaps-link {
+  display: block;
+  text-align: right;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.coords-gmaps-link:hover {
+  color: var(--text);
+}
+
+/* ---- MEDIA FEED ---- */
+.media-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.media-item figcaption {
+  margin-top: 16px;
+}
+
+.media-item img,
+.media-item video {
+  width: 100%;
+  border-radius: 2px;
+}
+
+.media-meta {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.media-caption {
+  font-family: var(--serif);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.65;
+  color: var(--text);
+}
+
+/* ---- SIGN-OFF ---- */
+.signoff {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.signoff-line {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+
+.signoff-names {
+  font-family: var(--serif);
+  font-size: clamp(14px, 1.4vw, 16px);
+  line-height: 2;
+  color: var(--text-muted);
+}
+
+/* ---- SITE FOOTER ---- */
+.site-footer {
+  text-align: center;
+  padding: 56px 24px 48px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---- NOSCRIPT ---- */
+.noscript-msg {
+  text-align: center;
+  padding: 80px 24px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   TRANSITIONS (used by countdown.js on reveal moment)
+   ============================================================ */
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.anim-fade-out {
+  animation: fadeOut 0.9s ease forwards;
+}
+
+.anim-fade-in {
+  animation: fadeIn 1.4s ease forwards;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .capsule {
+    padding: 80px 28px 64px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+
+  /* Switch countdown from a single row to 3-column grid */
+  .countdown,
+  .countup {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px 0;
+    width: 100%;
+    max-width: 360px;
+    align-items: start;
+  }
+
+  /* Hide separator dots in grid layout */
+  .dot {
+    display: none;
+  }
+
+  .unit {
+    padding: 0 4px;
+    gap: 8px;
+  }
+
+  .timer-overlay {
+    gap: 20px;
+    padding: 40px 20px;
+  }
+
+  .capsule {
+    padding: 64px 20px 48px;
+  }
+
+  .rule {
+    margin: 56px 0;
+  }
+}
+
+/* Narrow phones */
+@media (max-width: 380px) {
+  .num {
+    font-size: 38px;
+  }
+}
