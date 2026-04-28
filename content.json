@@ -39,5 +39,34 @@
     }
   ],
   "media_heading": "Table 11 over the years.",
-  "media": []
+  "media": [
+    {
+      "filename": "IMG_4677.jpg",
+      "type": "image",
+      "uploaded_by": "Josh and Emilie",
+      "caption": "[Add caption]",
+      "date_added": "2026-04-25"
+    },
+    {
+      "filename": "IMG_4680.jpg",
+      "type": "image",
+      "uploaded_by": "Josh and Emilie",
+      "caption": "[Add caption]",
+      "date_added": "2026-04-25"
+    },
+    {
+      "filename": "IMG_4681.jpg",
+      "type": "image",
+      "uploaded_by": "Josh and Emilie",
+      "caption": "[Add caption]",
+      "date_added": "2026-04-25"
+    },
+    {
+      "filename": "IMG_4598.mp4",
+      "type": "video",
+      "uploaded_by": "Josh and Emilie",
+      "caption": "[Add caption]",
+      "date_added": "2026-04-25"
+    }
+  ]
 }
